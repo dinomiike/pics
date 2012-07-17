@@ -1,0 +1,16 @@
+{
+	"pics": [
+		{
+			"reference": 100,
+			"fileName": "IMG_1537",
+			"description": "Water dragon",
+			"tags": ["iceland", "water"]
+		},
+		{
+			"reference": 101,
+			"fileName": "IMG_0717.jpg",
+			"description": "Reyðarfjörður",
+			"tags": ["iceland", "mountains"]
+		}
+	]
+}
