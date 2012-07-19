@@ -11,6 +11,36 @@
 			"fileName": "IMG_0717.jpg",
 			"description": "Reyðarfjörður",
 			"tags": ["iceland", "mountains"]
+		},
+		{
+			"reference": 102,
+			"fileName": "IMG_0224.jpg",
+			"description": "Leif Eriksson Memorial",
+			"tags": ["iceland", "statues"]
+		},
+		{
+			"reference": 103,
+			"fileName": "IMG_0228.jpg",
+			"description": "Inside Hallgrímskirkja",
+			"tags": ["iceland"]
+		},
+		{
+			"reference": 104,
+			"fileName": "IMG_0230.jpg",
+			"description": "Ceilings of Hallgrímskirkja",
+			"tags": ["iceland"]
+		},
+		{
+			"reference": 105,
+			"fileName": "IMG_0243.jpg",
+			"description": "Hallgrímskirkja from outside",
+			"tags": ["iceland"]
+		},
+		{
+			"reference": 106,
+			"fileName": "IMG_0277.jpg",
+			"description": "Barnafoss",
+			"tags": ["iceland", "waterfalls"]
 		}
 	]
 }
