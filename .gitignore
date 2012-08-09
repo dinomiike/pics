@@ -3,3 +3,5 @@
 *~
 .DS_Store
 assets/photos
+assets/api/Db/Db.php
+new.html
