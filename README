@@ -1,0 +1,6 @@
+Pics
+----
+
+**What?** Similar to the web front-end of Instagram. Able to view a specific image by the url, made for sharing single images at a time via Twitter or similar applications.
+
+This is an ongoing project being built in my free time, mostly for the purpose of getting better with Javascript and learning Backbone. This tool is built with BackboneJS and uses the Handlebars templating engine. There is a web service that serves up the path to the images and meta data around it, which was written with the (PHP) Slim framework.
