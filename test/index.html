@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Backbone testing</title>
+</head>
+<body>
+
+<div id="status">Loading...</div>
+<div id="contents"></div>
+
+<script src="../assets/js/underscore-min.js"></script>
+<script src="../assets/js/jquery-1.7.2.min.js"></script>
+<script src="../assets/js/backbone-min.js"></script>
+<script src="../assets/js/json2.js"></script>
+<script src="../assets/js/handlebars-1.0.0.beta.6.js"></script>
+
+<script id="photoTemplate" type="ext/x-handlebars-template">
+	<div><b>Photo #{{id}}'s name is {{filename}}</b></div>
+	<div>Let it always be known that this photo is... <i>{{description}}</i></div>
+</script>
+
+<script type="text/javascript">
+(function ($, window, undefined) {
+	var source = $("#photoTemplate").html();
+	window.Pic = Backbone.Model.extend({
+		urlRoot: "/pics/assets/api/getPic"
+	});
+
+	window.PicView = Backbone.View.extend({
+		tagName: "div",
+		id: "viewport",
+		className: "item",
+		template: Handlebars.compile(source),
+		initialize: function() {
+			$("#status").text("Ready!");
+			this.model.fetch();
+			this.model.on("change", this.render, this);
+		},
+		render: function() {
+			//this.model.fetch();
+			var attributes = this.model.toJSON();
+			this.$el.html(this.template(attributes));
+			return this;
+		}
+	});
+
+	var PicRouter = Backbone.Router.extend({
+		routes: {
+			"": "index",
+			"test/:id": "test"
+		},
+		index: function() {
+			console.log("index route");
+		},
+		test: function(id) {
+			var pic = new Pic({id: id});
+			var picView = new PicView({model: pic});
+			$("#contents").html(picView.render().el);
+		}
+	});
+
+	/*var pic = new Pic({id: 2});
+	var picView = new PicView({model: pic});
+	$("#contents").html(picView.render().el);*/
+
+	var app = new PicRouter();
+	Backbone.history.start();
+}(jQuery, window));
+</script>
+</body>
+</html>

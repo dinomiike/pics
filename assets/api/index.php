@@ -5,11 +5,11 @@ require "Db/Db.php";
 $app = new Slim();
 
 # GET route
-$app->get("/getPic/:refid", function($refid) {
-	#echo "Hello, $name<br>";
+$app->get("/getPic/:id", function($id) {
 	$db = new Db();
-	$pic = $db->getPic($refid);
-	echo json_encode($pic);
+	$pic = $db->getPic($id);
+	$tags["tags"] = $db->getPicTags($id);
+	echo json_encode(array_merge($pic, $tags));
 });
 
 # POST route

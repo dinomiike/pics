@@ -14,36 +14,23 @@
 	window.PicsView = Backbone.View.extend({
 		tagName: "div",
 		id: "pic",
-		template: Handlebars.compile(source),
+		template: Handlebars.compile($("#photoTemplate").html()), //source),
 		initialize: function() {
-			this.model.on("change", this.render, this);
 			this.model.fetch();
+			this.model.on("change", this.render, this);
+			//this.model.bind("change", this.render, this);
 		},
 		render: function() {
-			// Collect the tags for this image
-			//var tags = this.model.get("tags");
-
-			//console.log(this.model.get("filename"));
-
 			// Assign the content of the main div
 			var attributes = this.model.toJSON();
 
 			// Modify the filename attribute to contain the relative path to the image
 			// Note: If you use <img src={{filename}}> in the Handlebars template, the web browser tries to 
 			// interpret the root of the src without a filename, resulting in a the wrong MIME type being sent
-			attributes.filename = "src=assets/photos/miike/"+attributes.filename;
+			//attributes.filename = "src=assets/photos/miike/"+attributes.filename;
 
 			this.$el.html(this.template(attributes));
 			return this;
-
-
-			//if (tags.length !== 0) {
-			//	var temp = "";
-			//	tags.forEach(function(tag) {
-			//		temp += "<button class=\"btn btn-primary\">" + tag + "</button>&nbsp; ";
-			//	});
-			//	html += temp;
-			//}
 		}
 	});
 
@@ -62,7 +49,8 @@
 	// May not need one for now
 
 	// Router ==================================================
-	var PicsRouter = new (Backbone.Router.extend({
+	//var PicsRouter = new (Backbone.Router.extend({
+	var PicsRouter = Backbone.Router.extend({
 		routes: {
 			"": "index",
 			"view/:id": "view",
@@ -80,9 +68,9 @@
 			$("#console").html(this.indexView.render());
 		},
 
-		start: function() {
+		/*start: function() {
 			Backbone.history.start();
-		},
+		},*/
 
 		view: function(id) {
 			//if (typeof data.pics[id] === "undefined") {
@@ -90,11 +78,15 @@
 			//	$("#error").slideDown("fast");
 			//} else {
 			//	//this.pics = new Pics(data.pics[id]);
-				this.pics = new Pics({id: id});
-				this.picsView = new PicsView({model: this.pics});
 
-				//console.log("View a particular image. In this case, "+id);
-				$("#console").html(this.picsView.render().el);
+			//this.pics = new Pics({id: id});
+			//this.picsView = new PicsView({model: this.pics});
+			//$("#console").html(this.picsView.render().el);
+
+			var pics = new Pics({id: id});
+			var picsView = new PicsView({model: pics});
+
+			$("#console").html(picsView.render().el);
 			//}
 		},
 
@@ -105,7 +97,9 @@
 		usr: function() {
 			//console.log("View the profile of a user, including their pics and tags");
 		}
-	}));
+	});
 
-	PicsRouter.start();
+	var app = new PicsRouter();
+	Backbone.history.start();
+	//PicsRouter.start();
 }(jQuery, window));

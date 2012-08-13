@@ -42,17 +42,19 @@
 	</div>
 
 	<script id="photoTemplate" type="ext/x-handlebars-template">
-		<!--<img src="assets/photos/miike/{{filename}}"><br>-->
 		<img {{filename}}><br>
 		<h3>{{description}}</h3>
+		{{#each tags}}
+			<button class="btn btn-primary">{{tag}}</button>&nbsp; 
+		{{/each}}
 	</script>
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/js/underscore-min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/js/backbone-min.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="assets/js/json2.js"></script>
 	<script type="text/javascript" src="assets/js/handlebars-1.0.0.beta.6.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="assets/js/pics3.js"></script>
 
 <script type="text/javascript">
