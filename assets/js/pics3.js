@@ -1,7 +1,7 @@
 (function($, window, undefined) {
 	var source = $("#photoTemplate").html();
 
-	// Model ===================================================
+	// Models ==================================================
 	window.Pics = Backbone.Model.extend({
 		urlRoot: "/pics/assets/api/getPic",
 		defaults: {
@@ -10,11 +10,21 @@
 		}
 	});
 
+	window.PicsTagged = Backbone.Model.extend({
+		urlRoot: "/pics/assets/api/getPicsTagged",
+		defaults: {
+			id: 'No-id',
+		}
+	});
+
 	// View - Pic ===============================================
 	window.PicsView = Backbone.View.extend({
 		tagName: "div",
 		id: "pic",
 		template: Handlebars.compile($("#photoTemplate").html()), //source),
+		events: {
+			"click button": "pickTag"
+		},
 		initialize: function() {
 			this.model.fetch();
 			this.model.on("change", this.render, this);
@@ -29,6 +39,31 @@
 			// interpret the root of the src without a filename, resulting in a the wrong MIME type being sent
 			//attributes.filename = "src=assets/photos/miike/"+attributes.filename;
 
+			this.$el.html(this.template(attributes));
+			return this;
+		},
+		pickTag: function(event) {
+			//console.log("test: " + event.currentTarget.id);
+			if ($("#pic").is(":visible")) {
+				$("#pic").hide();
+			}
+			window.location = "#tags/"+event.currentTarget.id;
+		}
+	});
+
+	// View - Tag List ==========================================
+	window.TagsView = Backbone.View.extend({
+		tagName: "div",
+		id: "tags",
+		template: Handlebars.compile($("#tagsTemplate").html()),
+		initialize: function() {
+			this.model.fetch();
+			this.model.on("change", this.render, this);
+		},
+		render: function() {
+			var attributes = this.model.toJSON();
+
+			console.log(attributes);
 			this.$el.html(this.template(attributes));
 			return this;
 		}
@@ -54,7 +89,7 @@
 		routes: {
 			"": "index",
 			"view/:id": "view",
-			"tags": "tags",
+			"tags/:name": "tags",
 			"user": "usr"
 		},
 
@@ -87,11 +122,16 @@
 			var picsView = new PicsView({model: pics});
 
 			$("#console").html(picsView.render().el);
+
 			//}
 		},
 
-		tags: function() {
-			//console.log("View the tags of a pic or the tags posted by a user");
+		tags: function(name) {
+			//console.log("View all the images for the " + name + " tag"); 
+			var tags = new PicsTagged({id: name});
+			var tagsView = new TagsView({model: tags});
+
+			$("#console").html(tagsView.render().el);
 		},
 
 		usr: function() {

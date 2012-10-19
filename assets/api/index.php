@@ -12,6 +12,21 @@ $app->get("/getPic/:id", function($id) {
 	echo json_encode(array_merge($pic, $tags));
 });
 
+$app->get("/getPicsTagged/:name", function($name) {
+	$db = new Db();
+	$pics["taggedPics"] = $db->getPicsTagged($name);
+	echo json_encode($pics);
+});
+
+/*
+$app->get("/getAllTags", function() {
+	$db = new Db();
+	$tags["tags"] = $db->getAllTags();
+	echo json_encode($tags);
+});
+*/
+
+/*
 # POST route
 $app->post("/person", function($id) {
 	# Create new Person
@@ -26,5 +41,6 @@ $app->put("/person/:id", function($id) {
 $app->delete("/person/:id", function($id) {
 	# Delete person identified by $id
 });
+*/
 
 $app->run();

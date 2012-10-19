@@ -18,3 +18,9 @@ footer {
 #error {
 	display: none;
 }
+
+.tagButton {
+	display: inline-block;
+	width: 200px;
+	height: 170px;
+}

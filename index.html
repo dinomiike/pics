@@ -45,7 +45,13 @@
 		<img {{filename}}><br>
 		<h3>{{description}}</h3>
 		{{#each tags}}
-			<button class="btn btn-primary">{{tag}}</button>&nbsp; 
+			<button id="{{tag}}" class="btn btn-primary">{{tag}}</button>&nbsp; 
+		{{/each}}
+	</script>
+
+	<script id="tagsTemplate" type="ext/x-handlebars-template">
+		{{#each taggedPics}}
+			<div class="tagButton"><a href="/pics/#view/{{id}}"><img src="/pics/assets/photos/miike/thumbs/{{fileName}}"></a></div>
 		{{/each}}
 	</script>
 
