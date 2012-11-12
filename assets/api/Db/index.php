@@ -1,13 +1,26 @@
 <?php
 require "Db.php";
 
+$searchTerm = "iceland";
+
 $db = new Db();
-$pic = $db->getPic(1);
-$tags["tags"] = $db->getPicTags(4);
-$tags2["tags2"] = array("dk");
-var_dump($pic);
+#var_dump($db->searchFor($searchTerm));
+#$combinedData = $db->searchFor($searchTerm);
+#var_dump($combinedData);
+
+$tags["tags"] = $db->searchTagsFor($searchTerm);
 var_dump($tags);
-echo "----------\n";
-var_dump(array_merge($pic, $tags));
-var_dump($tags2);
-echo count($tags2)."\n";
+
+echo "\n";
+
+$pics["pics"] = $db->searchPicsFor($searchTerm);
+var_dump($pics);
+
+/*
+usort($combinedData, "relevanceSort");
+function relevanceSort($a, $b) {
+	return $a["relevance"] > $b["relevance"];
+}
+*/
+
+echo "\n";

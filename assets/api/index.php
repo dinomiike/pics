@@ -18,6 +18,12 @@ $app->get("/getPicsTagged/:name", function($name) {
 	echo json_encode($pics);
 });
 
+$app->get("/getTagCloud", function() {
+	$db = new Db();
+	$cloud["tags"] = $db->getTagCloud();
+	echo json_encode($cloud);
+});
+
 /*
 $app->get("/getAllTags", function() {
 	$db = new Db();

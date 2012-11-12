@@ -6,21 +6,38 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Picture sharing tool">
 	<meta name="author" content="Miike Ramos">
+	<meta name="title" content="Secret Dinosaur Handshake Pics">
+	<meta name="description" content="Secret Dinosaur Handshake Pics">
+	<meta name="keywords" content="secret dinosaur handshake, secret dino, secret dino handshake">
 
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-33516907-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
 </head>
 
 <body>
 
-	<div class="navbar navbar-fixed-top">
+	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="#" class="brand">Pics</a>
-				<a href="#" class="sub-brand">Secret Dinosaur Handshake</a>
-				<div class="nav-collapse">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" class="brand">Secret Dinosaur Handshake</a>
+				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="active"><a href="#">Home</a></li>
 					</ul>
@@ -37,9 +54,22 @@
 		<div id="console"></div>
 
 		<footer>
-			<p>&copy; The Secret Dinosaur Handshake Project 2012</p>
+			<p>The Secret Dinosaur Handshake Project 2012</p>
 		</footer>
 	</div>
+	<div class="taglist"></div>
+
+	<script id="startTemplate" type="ext/x-handlebars-template">
+		<div class="hero-unit">
+			<h1>Photo adventure journal.</h1>
+			<p>Click a tag button to browse the pics.</p>
+		</div>
+		<div id="tabRow">
+		{{#each tags}}
+			<button id="{{tag}}" class="btn btn-primary">{{tag}}</button>&nbsp; 
+		{{/each}}
+		</div>
+	</script>
 
 	<script id="photoTemplate" type="ext/x-handlebars-template">
 		<img {{filename}}><br>
@@ -61,18 +91,7 @@
 	<script type="text/javascript" src="assets/js/json2.js"></script>
 	<script type="text/javascript" src="assets/js/handlebars-1.0.0.beta.6.js"></script>
 	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/pics3.js"></script>
-
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-33516907-1']);
-_gaq.push(['_trackPageview']);
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
+	<script type="text/javascript" src="assets/js/pics.js"></script>
 
 </body>
 </html>
