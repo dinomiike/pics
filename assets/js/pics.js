@@ -60,6 +60,9 @@
 		tagName: "div",
 		id: "tags",
 		template: Handlebars.compile($("#tagsTemplate").html()),
+		events: {
+			"click button": "pickTag"
+		},
 		initialize: function() {
 			this.model.fetch();
 			this.model.on("change", this.render, this);
@@ -70,6 +73,9 @@
 			//console.log(attributes);
 			this.$el.html(this.template(attributes));
 			return this;
+		},
+		pickTag: function(event) {
+			_gaq.push(['_trackEvent', 'tags', event.currentTarget.id])
 		}
 	});
 
@@ -89,9 +95,6 @@
 			var attributes = this.model.toJSON();
 			this.$el.html(this.template(attributes));
 			return this;
-			//var html = "<div class=\"hero-unit\"><h1>We got pics.</h1>";
-			//html += "<p>Pics is a tool for sharing photos with anyone online.</p></div>";
-			//return this.$el.html(html);
 		},
 		pickTag: function(event) {
 			_gaq.push(['_trackEvent', 'tags', event.currentTarget.id]);
