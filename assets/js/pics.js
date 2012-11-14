@@ -209,7 +209,7 @@
 		var path = location.href;
 		var point = path.indexOf("#search");
 		var criteria = $("#searchCriteria").val();
-		window.location = point != -1 ? path.substring(0, point)+"#search/"+criteria : path+"search/"+criteria;
+		window.location = point != -1 ? path.substring(0, point)+"#search/"+criteria : path+"#search/"+criteria;
 		return false;
 	});
 }(jQuery, window));
