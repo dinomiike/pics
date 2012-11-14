@@ -13,12 +13,20 @@
 	window.PicsTagged = Backbone.Model.extend({
 		urlRoot: "/pics/assets/api/getPicsTagged",
 		defaults: {
-			id: 'No-id',
+			id: 'No-id'
 		}
 	});
 
 	window.TagsCloud = Backbone.Model.extend({
-		urlRoot: "/pics/assets/api/getTagCloud",
+		urlRoot: "/pics/assets/api/getTagCloud"
+	});
+
+	window.SearchTags = Backbone.Model.extend({
+		urlRoot: "/pics/assets/api/searchTagsFor"
+	});
+
+	window.SearchPics = Backbone.Model.extend({
+		urlRoot: "/pics/assets/api/searchPicsFor"
 	});
 
 	// View - Pic ===============================================
@@ -102,6 +110,38 @@
 		}
 	});
 
+	// View - Search Tags  ======================================
+	var SearchTagsView = Backbone.View.extend({
+		tagName: "div",
+		id: "searchTagsResults",
+		template: Handlebars.compile($("#searchTagsTemplate").html()),
+		initialize: function() {
+			this.model.fetch();
+			this.model.on("change", this.render, this);
+		},
+		render: function() {
+			var attributes = this.model.toJSON();
+			this.$el.html(this.template(attributes));
+			return this;
+		}
+	});
+
+	// View - Search Pics =======================================
+	var SearchPicsView = Backbone.View.extend({
+		tagName: "div",
+		id: "searchPicsResults",
+		template: Handlebars.compile($("#searchPicsTemplate").html()),
+		initialize: function() {
+			this.model.fetch();
+			this.model.on("change", this.render, this);
+		},
+		render: function() {
+			var attributes = this.model.toJSON();
+			this.$el.html(this.template(attributes));
+			return this;
+		}
+	});
+
 	// View - Errors ============================================
 	// May not need one for now
 
@@ -112,7 +152,8 @@
 			"": "index",
 			"view/:id": "view",
 			"tags/:name": "tags",
-			"user": "usr"
+			"user": "usr",
+			"search/:params": "search"
 		},
 
 		initialize: function() {
@@ -120,11 +161,8 @@
 		},
 
 		index: function() {
-			//console.log("Index invoked");
 			var tagsCloud = new TagsCloud({});
-			//this.indexView = new IndexView({model: tagsCloud});
 			var indexView = new IndexView({model: tagsCloud});
-			//$("#console").html(this.indexView.render());
 			$("#console").html(indexView.render().el);
 		},
 
@@ -133,22 +171,10 @@
 		},*/
 
 		view: function(id) {
-			//if (typeof data.pics[id] === "undefined") {
-			//	//console.log("This image cannot be found");
-			//	$("#error").slideDown("fast");
-			//} else {
-			//	//this.pics = new Pics(data.pics[id]);
-
-			//this.pics = new Pics({id: id});
-			//this.picsView = new PicsView({model: this.pics});
-			//$("#console").html(this.picsView.render().el);
-
 			var pics = new Pics({id: id});
 			var picsView = new PicsView({model: pics});
 
 			$("#console").html(picsView.render().el);
-
-			//}
 		},
 
 		tags: function(name) {
@@ -161,10 +187,29 @@
 
 		usr: function() {
 			//console.log("View the profile of a user, including their pics and tags");
+		},
+
+		search: function(params) {
+			var searchTags = new SearchTags({id: params});
+			var searchTagsView = new SearchTagsView({model: searchTags});
+
+			var searchPics = new SearchPics({id: params});
+			var searchPicsView = new SearchPicsView({model: searchPics});
+
+			$("#console").html(searchTagsView.render().el);
+			$("#console").append(searchPicsView.render().el);
 		}
 	});
 
 	var app = new PicsRouter();
 	Backbone.history.start();
-	//PicsRouter.start();
+
+	// Search Form
+	$("#search").on("submit", function() {
+		var path = location.href;
+		var point = path.indexOf("#search");
+		var criteria = $("#searchCriteria").val();
+		window.location = point != -1 ? path.substring(0, point)+"#search/"+criteria : path+"search/"+criteria;
+		return false;
+	});
 }(jQuery, window));

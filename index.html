@@ -4,15 +4,14 @@
 	<meta charset="utf-8">
 	<title>pics | secret dinosaur handshake</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Picture sharing tool">
 	<meta name="author" content="Miike Ramos">
 	<meta name="title" content="Secret Dinosaur Handshake Pics">
 	<meta name="description" content="Secret Dinosaur Handshake Pics">
 	<meta name="keywords" content="secret dinosaur handshake, secret dino, secret dino handshake">
 
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
+	<link rel="stylesheet" href="assets/css/style.css">
 
 <script type="text/javascript">
 	var _gaq = _gaq || [];
@@ -31,15 +30,24 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<!--<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-				</button>
+				</button>-->
 				<a href="#" class="brand">Secret Dinosaur Handshake</a>
+				<!--<a href="#" class="star">Pics</a>-->
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li class="active"><a href="#">Pics</a></li>
+						<li class="active">
+							<form id="search" method="get" action="#search/test" class="form-search">
+								<div class="input-append">
+									<input type="text" id="searchCriteria" class="span2 search-query">
+									<button type="submit" class="btn">Search</button>
+								</div>
+							</form>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -52,10 +60,12 @@
 			<b>Can't find that pic.</b> You can check the URL, though something may have blown up on our side. [error 404]
 		</div>
 		<div id="console"></div>
+	</div>
 
-		<footer>
-			<p>The Secret Dinosaur Handshake Project 2012</p>
-		</footer>
+	<div id="footer">
+		<div class="container">
+			The Secret Dinosaur Handshake Project 2012
+		</div>
 	</div>
 
 	<script id="startTemplate" type="ext/x-handlebars-template">
@@ -80,6 +90,20 @@
 
 	<script id="tagsTemplate" type="ext/x-handlebars-template">
 		{{#each taggedPics}}
+			<div class="tagButton"><a href="/pics/#view/{{id}}"><img src="/pics/assets/photos/miike/thumbs/{{fileName}}"></a></div>
+		{{/each}}
+	</script>
+
+	<script id="searchTagsTemplate" type="ext/x-handlebars-template">
+		<h1>Search results</h1>
+		{{#each tags}}
+			<button id="{{tag}}" class="btn btn-primary">{{tag}}</button>&nbsp;
+		{{/each}}
+		<div>&nbsp;</div>
+	</script>
+
+	<script id="searchPicsTemplate" type="ext/x-handlebars-template">
+		{{#each pics}}
 			<div class="tagButton"><a href="/pics/#view/{{id}}"><img src="/pics/assets/photos/miike/thumbs/{{fileName}}"></a></div>
 		{{/each}}
 	</script>

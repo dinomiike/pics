@@ -3,11 +3,11 @@ body {
 	padding-bottom: 40px;
 }
 
-footer {
+#footer {
 	padding-top: 50px;
 }
 
-footer p {
+#footer div {
 	font-size: 11px;
 }
 
@@ -56,6 +56,22 @@ body > .navbar .brand:hover {
 	color: #fff;
 }
 
+.star {
+	display: block;
+	float: left;
+	padding: 10px 20px 10px;
+	margin-left: -20px;
+	font-size: 20px;
+	font-weight: 200;
+	color: #777777;
+	/*text-shadow: 0 1px 0 #ffffff;*/
+}
+
+.star:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
 .hero-unit {
 	background-color: #39a5d3;
 	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0086cc), to(#01589a));
@@ -100,4 +116,9 @@ body > .navbar .brand:hover {
 	background-color: #f5f5f5;
 	border-top: 1px solid #fff;
 	border-bottom: 1px solid #ddd;
-	}
+}
+
+.navbar form {
+	padding: 5px 0 0 5px;
+	margin: 0;
+}

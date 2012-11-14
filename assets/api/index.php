@@ -24,6 +24,18 @@ $app->get("/getTagCloud", function() {
 	echo json_encode($cloud);
 });
 
+$app->get("/searchTagsFor/:params", function($params) {
+	$db = new Db();
+	$tagResults["tags"] = $db->searchTagsFor($params);
+	echo json_encode($tagResults);
+});
+
+$app->get("/searchPicsFor/:params", function($params) {
+	$db = new Db();
+	$picResults["pics"] = $db->searchPicsFor($params);
+	echo json_encode($picResults);
+});
+
 /*
 $app->get("/getAllTags", function() {
 	$db = new Db();
